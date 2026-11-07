@@ -3,6 +3,14 @@
   src: url("https://barasch.github.io/notes/et-book/et-book-roman-line-figures/et-book-roman-line-figures.woff");
 }
 
+:root {
+  color-scheme: light dark;
+  --paper: #fffff8;
+  --ink: #111;
+  --muted: #6f6a62;
+  --accent: #8f2f23;
+}
+
 * { box-sizing: border-box; }
 
 html { min-height: 100%; }
@@ -14,8 +22,8 @@ body {
   padding: 2rem 6% 3rem;
   display: flex;
   flex-direction: column;
-  background: #fffff8;
-  color: #111;
+  background: var(--paper);
+  color: var(--ink);
   font: 1.25rem/1.45 et-book, Georgia, serif;
 }
 
@@ -44,9 +52,6 @@ h2 {
   text-transform: uppercase;
 }
 
-h2 a { text-decoration: none; }
-h2 a:hover, h2 a:focus { text-decoration: underline; }
-
 ul {
   margin: 0;
   padding: 0;
@@ -57,14 +62,37 @@ li { margin-bottom: 1rem; }
 
 a {
   color: inherit;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: var(--accent);
+}
+
+#recent-notes a {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
   text-decoration-thickness: .05em;
   text-underline-offset: .15em;
+}
+
+#recent-notes a:hover,
+#recent-notes a:focus {
+  text-decoration-color: currentColor;
+}
+
+#recent-notes time {
+  margin-left: .55rem;
+  color: var(--muted);
+  font: .72em/1.4 "Gill Sans", "Gill Sans MT", sans-serif;
+  white-space: nowrap;
 }
 
 footer {
   margin-top: auto;
   padding-top: 3rem;
-  color: #777;
+  color: var(--muted);
   font: .72rem/1.4 "Gill Sans", "Gill Sans MT", sans-serif;
 }
 
@@ -78,7 +106,25 @@ footer {
   white-space: nowrap;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #151515;
+    --ink: #ddd;
+    --muted: #aaa;
+  }
+
+  .site-header img {
+    filter: invert(1);
+  }
+}
+
 @media (max-width: 600px) {
   main { margin-top: 4rem; }
   section { grid-template-columns: 1fr; gap: .5rem; }
+
+  #recent-notes time {
+    display: block;
+    margin-left: 0;
+    margin-top: .2rem;
+  }
 }
